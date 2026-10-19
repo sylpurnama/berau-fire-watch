@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metode dan Sumber Data · Berau Fire Watch</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#eef0ea; --panel:#f8f9f5; --ink:#1d2a22; --muted:#5d6b62; --line:#d5dacf; --accent:#1f6b4f; --warn:#8a5a00; --warnbg:#f6ecc4;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#141a16; --panel:#1b231e; --ink:#e6ece5; --muted:#9aa8a0; --line:#2c3831; --accent:#6cc79b; --warn:#e3b92c; --warnbg:#3a3217; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 var(--body)}
+header{background:var(--panel);border-bottom:1px solid var(--line)}
+.wrap{max-width:900px;margin:0 auto;padding-block:20px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+main.wrap{padding-block:28px 64px}
+a{color:var(--accent)}
+.back{font-size:13px}
+h1{font:800 32px/1.15 var(--display);margin:10px 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+h2{font:800 22px/1.25 var(--display);margin:40px 0 10px;text-wrap:balance}
+h3{font:600 15px var(--body);margin:22px 0 6px}
+p{margin:8px 0}
+ul,ol{padding-left:20px;margin:8px 0}
+li{margin:4px 0}
+.callout{background:var(--warnbg);border:1px solid var(--warn);border-radius:8px;padding:12px 14px;margin:16px 0}
+.toc{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;margin:16px 0 0}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font:600 11.5px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+code,pre{font-family:var(--mono);font-size:13px}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;line-height:1.7;margin:12px 0}
+.ref li{margin:8px 0}
+.num{font-variant-numeric:tabular-nums}
+em.todo{color:var(--warn);font-style:normal}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="back" href="index.html">&larr; Kembali ke dashboard</a>
+  <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:10px"><img src="assets/logo.png" alt="Logo Berau Fire Watch: Geospatial Environmental Intelligence" width="150" height="147" style="background:#f6f8f3;border-radius:12px;padding:8px;flex:none;border:1px solid var(--line)">
+  <div><h1 style="margin-top:0">Metode dan sumber data</h1>
+  <p class="sub">Berau Fire Watch · Kabupaten Berau · versi metode 0,2 (19 Oktober 2026)<br>Satellite Monitoring • Fire Risk Analysis • Air Quality</p></div></div>
+  <nav class="toc" aria-label="Isi halaman">
+    <a href="#ringkasan">Ringkasan</a><a href="#sumber">Sumber data</a><a href="#hotspot">Metode hotspot</a><a href="#skor">Skor risiko</a>
+    <a href="#lahan">Penutup lahan</a><a href="#udara">Kualitas udara</a><a href="#batas">Keterbatasan</a><a href="#provenance">Data pengguna</a><a href="#rujukan">Rujukan</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<div class="callout"><b>Status: prototipe, belum divalidasi.</b> Bobot dan ambang skor ditetapkan secara heuristik dan belum dikalibrasi dengan kejadian kebakaran di Berau. Gunakan sebagai alat bantu pemantauan, bukan pengganti informasi resmi BMKG, BPBD, atau Manggala Agni.</div>
+
+<h2 id="ringkasan">Ringkasan</h2>
+<p>Dashboard menggabungkan tiga jenis data: (1) deteksi titik panas aktif dari satelit (observasi), (2) cuaca dan konsentrasi polutan dari model numerik, dan (3) data spasial lokal berupa batas desa, lahan gambut, dan penutup lahan. Cuaca, gambut, dan hotspot dihitung menjadi indeks risiko 0-100 untuk 14 kecamatan dan 118 desa. Kualitas udara dilaporkan terpisah sebagai ISPU.</p>
+<p>Indeks ini menilai <b>kondisi yang mendukung terjadinya kebakaran</b> (bahan bakar kering, cuaca panas, gambut, api di sekitar). Indeks ini tidak menyatakan bahwa kebakaran sedang terjadi atau pasti terjadi.</p>
+
+<h2 id="sumber">Sumber data</h2>
+<div class="tw"><table>
+<thead><tr><th>Data</th><th>Produk dan penyedia</th><th>Jenis</th><th>Resolusi</th><th>Pembaruan</th><th>Dipakai untuk</th></tr></thead>
+<tbody>
+<tr><td>Titik panas aktif</td><td>NASA FIRMS, VIIRS 375 m dari S-NPP, NOAA-20, dan NOAA-21 (near real time), diambil langsung dari API FIRMS</td><td>Observasi satelit</td><td>Piksel 375 m</td><td>Beberapa jam setelah lintasan satelit; disalin ke situs sekitar tiap 30 menit</td><td>Titik di peta dan komponen skor</td></tr>
+<tr><td>Suhu udara, kelembapan, angin, hujan, suhu tanah 0 cm</td><td>Open-Meteo (prakiraan cuaca numerik)</td><td>Model</td><td>Grid model, beberapa sampai belasan km</td><td>Per jam; disalin ke situs sekitar tiap 30 menit</td><td>Komponen cuaca pada skor</td></tr>
+<tr><td>PM2.5, PM10, NO<sub>2</sub>, SO<sub>2</sub>, CO, O<sub>3</sub></td><td>Open-Meteo Air Quality, bersumber dari model CAMS (Copernicus, ECMWF)</td><td>Model</td><td>Grid model, puluhan km</td><td>Per jam; seri 24 jam terakhir</td><td>Perhitungan ISPU dan saran aktivitas</td></tr>
+<tr><td>Penutup lahan</td><td>KLHK, Penutupan Lahan 2025 skala 1:50.000 (data pengguna)</td><td>Peta tematik</td><td>Vektor, disederhanakan sekitar 44 m</td><td>Statis (tahun 2025)</td><td>Lapisan peta, komposisi lahan per desa, jenis lahan di lokasi hotspot; belum masuk skor</td></tr>
+<tr><td>Batas desa dan kecamatan</td><td>Data pengguna (118 desa, 14 kecamatan, Kab. Berau)</td><td>Vektor</td><td>Disederhanakan sekitar 33 m</td><td>Statis</td><td>Pembagian wilayah, skor desa, penentuan lokasi hotspot</td></tr>
+<tr><td>Lahan gambut</td><td>Data pengguna (lihat bagian Data pengguna)</td><td>Vektor</td><td>Disederhanakan sekitar 11 m</td><td>Statis</td><td>Komponen gambut pada skor</td></tr>
+<tr><td>Peta dasar</td><td>OpenStreetMap contributors</td><td>-</td><td>-</td><td>-</td><td>Latar peta</td></tr>
+</tbody></table></div>
+<p><b>Observasi dan model dibedakan.</b> Hotspot adalah hasil pengamatan satelit. Suhu udara, kelembapan, angin, hujan, dan konsentrasi polutan berasal dari <b>model</b>, bukan pengukuran stasiun atau alat ukur di Berau. Suhu tanah 0 cm dari model dipakai sebagai pendekatan pemanasan permukaan dalam skor (ditandai * di dashboard). Suhu permukaan lahan (LST) satelit tidak ditampilkan: produk yang dapat diambil otomatis tertunda hari sampai minggu (satelit kutub hanya melintas sekali atau dua kali sehari dan terhalang awan), sehingga tidak menggambarkan kondisi terkini.</p>
+<h3>Pembaruan data</h3>
+<p>Situs ini disimpan sebagai halaman statis. Sebuah proses otomatis (GitHub Actions) berjalan sekitar tiap 30 menit: mengambil hotspot dari API NASA FIRMS dan cuaca serta konsentrasi polutan dari Open-Meteo, menyimpannya sebagai berkas data, lalu menerbitkan ulang situs. Browser pengunjung hanya membaca berkas itu, sehingga kunci akses FIRMS (MAP_KEY) tidak pernah dikirim ke pengunjung dan permintaan ke layanan sumber tidak bertambah menurut jumlah pengunjung. Jadwal GitHub dapat tertunda; waktu data selalu ditampilkan, dan dashboard memberi tanda bila datanya sudah lama. Bila pengambilan gagal, situs tetap menampilkan data terakhir yang berhasil.</p>
+<p>Bila dijalankan di komputer sendiri (<code>server.py</code>), dashboard mengambil hotspot langsung dari FIRMS dengan cache 10 menit dan cuaca langsung dari Open-Meteo.</p>
+
+<h2 id="hotspot">Metode titik panas</h2>
+<h3>Deteksi</h3>
+<p>Produk VIIRS 375 m mendeteksi piksel yang lebih panas daripada lingkungan sekitarnya pada kanal inframerah menengah dan termal, dengan algoritma kontekstual (Schroeder dkk., 2014). Setiap deteksi memiliki <i>fire radiative power</i> (FRP, dalam MW) dan kelas keyakinan <i>low</i>, <i>nominal</i>, atau <i>high</i>.</p>
+<h3>Pemrosesan di dashboard</h3>
+<ol>
+<li>Data diambil dari tiga satelit untuk 2 hari terakhir pada kotak 116,0-119,2 BT dan 0,9-2,7 LU. Kotak ini mencakup Berau dan sebagian wilayah tetangga.</li>
+<li>Deteksi berkeyakinan rendah dibuang.</li>
+<li>Deteksi pada sel sekitar 1 km (0,01&deg;) di tanggal yang sama dari satelit berbeda dianggap satu titik; FRP terbesar dipertahankan.</li>
+<li>Untuk skor, piksel dikelompokkan lagi ke sel sekitar 5 km (0,05&deg;) sebagai <b>kelompok hotspot</b>, supaya satu kebakaran besar yang terdiri dari banyak piksel tidak dihitung berulang.</li>
+<li>Posisi setiap titik dicocokkan dengan batas desa dan lahan gambut. Titik di luar batas Berau digambar lebih pucat dan tetap dihitung bila berada dalam radius skor.</li>
+</ol>
+<h3>Cara menafsirkan</h3>
+<p>Hotspot adalah anomali panas, bukan konfirmasi api. Penyebabnya dapat berupa kebakaran lahan, pembakaran terkendali, atau sumber panas lain. Kebakaran dapat terlewat karena tutupan awan atau asap, ukuran api yang kecil, atau waktu lintasan satelit. Data near real time juga dapat direvisi oleh NASA. Waktu hotspot ditampilkan dalam UTC (WITA = UTC+8).</p>
+
+<h2 id="skor">Skor risiko</h2>
+<h3>Komponen cuaca (0-100)</h3>
+<pre>S_cuaca = 100 × (0,25·fT + 0,30·fRH + 0,15·fV + 0,20·fD + 0,10·fS)</pre>
+<div class="tw"><table>
+<thead><tr><th>Faktor</th><th>Normalisasi (dibatasi 0-1)</th><th>Bobot</th><th>Alasan</th></tr></thead>
+<tbody>
+<tr><td>fT, suhu udara T (&deg;C)</td><td><code>(T − 26) / 10</code></td><td class="num">0,25</td><td>Suhu tinggi mempercepat pengeringan bahan bakar</td></tr>
+<tr><td>fRH, kelembapan rendah RH (%)</td><td><code>(80 − RH) / 40</code></td><td class="num">0,30</td><td>Udara kering menurunkan kadar air bahan bakar halus</td></tr>
+<tr><td>fV, angin V (km/jam)</td><td><code>V / 30</code></td><td class="num">0,15</td><td>Angin mempercepat penjalaran api</td></tr>
+<tr><td>fD, hari tanpa hujan D</td><td><code>D / 7</code></td><td class="num">0,20</td><td>D = jumlah hari berturut-turut berhujan &lt; 1 mm, dihitung mundur dari hari ini (data 7 hari terakhir)</td></tr>
+<tr><td>fS, suhu tanah 0 cm Ts (&deg;C)</td><td><code>(Ts − 28) / 14</code></td><td class="num">0,10</td><td>Pendekatan pemanasan permukaan (proksi LST)</td></tr>
+</tbody></table></div>
+<p>Pemilihan faktor mengikuti variabel yang juga menjadi dasar sistem indeks bahaya kebakaran seperti Canadian Forest Fire Weather Index (Van Wagner, 1987). Skor di sini <b>bukan</b> FWI: tidak ada perhitungan kadar air bahan bakar berlapis (FFMC, DMC, DC) dan bobot di atas belum dikalibrasi.</p>
+
+<h3>Skor akhir</h3>
+<pre>Kecamatan:  S = min(100, S_cuaca + min(20, 5·N_25km) + min(10, 2·G_kec))
+Desa:       S = min(100, S_cuaca(kecamatan) + min(10, 2·G_desa) + min(20, 10·N_desa + 3·N_10km))</pre>
+<ul>
+<li><b>N_25km</b>: jumlah kelompok hotspot dalam radius 25 km dari titik pantau kecamatan.</li>
+<li><b>N_desa</b>: kelompok hotspot di dalam poligon desa. <b>N_10km</b>: kelompok di luar desa tetapi dalam radius 10 km dari titik tengah desa.</li>
+<li><b>G_kec</b>, <b>G_desa</b>: persentase luas gambut di kecamatan atau desa.</li>
+</ul>
+<h3>Dasar komponen tambahan</h3>
+<p><b>Hotspot</b> dipakai karena merupakan bukti langsung adanya sumber panas di sekitar lokasi, sedangkan faktor cuaca hanya menggambarkan kondisi yang mendukung. <b>Gambut</b> dipakai karena kebakaran gambut menyala di bawah permukaan, sulit dipadamkan, dan melepaskan karbon serta asap dalam jumlah besar (Page dkk., 2002). Batas maksimum tambahan (20 untuk hotspot, 10 untuk gambut) dan pengali (5, 10, 3, dan 2) adalah pilihan heuristik awal. Nilai ini belum diuji sensitivitasnya dan perlu disetel setelah validasi.</p>
+<h3>Contoh perhitungan</h3>
+<p>Kecamatan Tanjung Redeb pada 14 Oktober 2026 pukul 17.00 WITA: T = 29,8 &deg;C, RH = 73%, V = 9 km/jam, D = 0 hari, Ts = 29,4 &deg;C; tidak ada hotspot dalam 25 km dan gambut 0%.</p>
+<pre>fT  = (29,8 − 26) / 10 = 0,380
+fRH = (80 − 73) / 40   = 0,175
+fV  = 9 / 30           = 0,300
+fD  = 0 / 7            = 0,000
+fS  = (29,4 − 28) / 14 = 0,100
+S_cuaca = 100 × (0,25×0,380 + 0,30×0,175 + 0,15×0,300 + 0,20×0 + 0,10×0,100)
+        = 100 × 0,2025 = 20,25
+S = 20,25 + 0 + 0 = 20,25 → 20 (kategori Rendah)</pre>
+<h3>Kategori</h3>
+<div class="tw"><table style="min-width:420px">
+<thead><tr><th>Skor</th><th>Kategori</th></tr></thead>
+<tbody><tr><td class="num">&lt; 30</td><td>Rendah</td></tr><tr><td class="num">30-49</td><td>Sedang</td></tr><tr><td class="num">50-69</td><td>Tinggi</td></tr><tr><td class="num">&ge; 70</td><td>Ekstrem</td></tr></tbody></table></div>
+<p>Pesan peringatan yang tampil (misalnya larangan membuang puntung rokok dan membakar sampah) dipilih berdasarkan kategori ini.</p>
+<h3>Resolusi spasial skor desa</h3>
+<p>Cuaca diambil pada satu titik per kecamatan, sehingga semua desa dalam satu kecamatan memakai cuaca yang sama. Perbedaan skor antardesa dalam satu kecamatan hanya berasal dari gambut dan hotspot.</p>
+
+<h2 id="lahan">Penutup lahan (PL 2025)</h2>
+<p>Lapisan ini berasal dari berkas Penutupan Lahan 2025 skala 1:50.000 yang diserahkan pengguna (atribut <code>NAMA_LAHAN</code>, 20 kelas, dirangkum menjadi 12 kelompok tampilan). Skrip <code>prepare_landcover.py</code> memotong poligon ke batas desa Berau, menggabungkannya per kelompok, lalu menghitung luas tiap kelompok pada setiap desa dan kecamatan. Cakupan hasil potongan mencapai sekitar 99,4% luas batas desa; selisihnya berasal dari celah atau perbedaan garis batas antara dua berkas.</p>
+<p>Dashboard memakai lapisan ini sebagai <b>informasi pelengkap</b>: peta, komposisi lahan desa terpilih, kelas dominan pada tooltip desa, dan jenis lahan di lokasi tiap hotspot. Lapisan ini <b>belum masuk ke perhitungan skor</b>, karena bobot kerentanan tiap kelas harus ditetapkan dari data kejadian kebakaran, bukan ditebak. Kelompok warna adalah pilihan tampilan, bukan ketentuan KLHK. Berkas PL adalah interpretasi citra untuk satu tahun, sehingga perubahan lahan setelahnya tidak tercermin.</p>
+
+<h2 id="udara">Kualitas udara (ISPU)</h2>
+<p>Indeks yang ditampilkan adalah <b>ISPU</b> (Indeks Standar Pencemar Udara) menurut Peraturan Menteri LHK No. P.14/MENLHK/SETJEN/KUM.1/7/2020. Masukannya adalah konsentrasi polutan dari model CAMS melalui Open-Meteo, bukan hasil alat ukur. Karena itu nilai yang tampil adalah <b>estimasi ISPU</b>, bukan ISPU resmi stasiun pemantau.</p>
+<h3>Perhitungan</h3>
+<pre>I = (Ia − Ib) / (Xa − Xb) × (Xx − Xb) + Ib
+ISPU = nilai terbesar dari sub-indeks semua parameter yang dihitung</pre>
+<p>Ia dan Ib adalah batas atas dan bawah ISPU pada pita yang memuat konsentrasi, Xa dan Xb batas atas dan bawah konsentrasi pita itu, dan Xx konsentrasi hasil perhitungan. Konsentrasi PM2.5, PM10, NO<sub>2</sub>, dan SO<sub>2</sub> dirata-ratakan bergerak 24 jam dari seri per jam, dengan syarat minimal 75% jam terisi. Kategori: Baik (1-50), Sedang (51-100), Tidak Sehat (101-200), Sangat Tidak Sehat (201-300), Berbahaya (&ge; 301).</p>
+<h3>Parameter yang dihitung</h3>
+<p>Hanya parameter yang ambangnya sudah dapat ditelusuri ke Permen yang ikut menentukan ISPU: PM2.5, PM10, NO<sub>2</sub>, dan SO<sub>2</sub>. CO dan O<sub>3</sub> ditampilkan sebagai informasi tetapi <b>tidak dihitung</b>, dan HC tidak tersedia dari model. Ambang PM2.5, PM10, NO<sub>2</sub>, dan SO<sub>2</sub> dikutip dari sumber sekunder yang merujuk Permen tersebut (lihat catatan di <code>data/ispu_breakpoints.json</code>) dan <b>belum dicocokkan dengan Lampiran resmi</b>. Cocokkan dengan Berita Negara No. 774 Tahun 2020 sebelum dipakai untuk pernyataan resmi.</p>
+<h3>Keterbatasan</h3>
+<p>Model CAMS beresolusi puluhan kilometer dan dapat meleset di dekat sumber asap lokal. Pengukuran stasiun atau sensor di Berau belum terintegrasi; bila tersedia, data itu menggantikan estimasi ini.</p>
+
+<h2 id="batas">Keterbatasan dan rencana validasi</h2>
+<ul>
+<li><b>Belum divalidasi.</b> Langkah berikutnya: membandingkan skor dengan hotspot dan luas area terbakar historis di Berau (misalnya kurva ROC dan AUC), lalu menyetel bobot dan ambang.</li>
+<li><b>Cuaca dan kualitas udara dari model</b>, tanpa observasi stasiun BMKG, KLHK, atau sensor lokal. Hujan lokal yang sempit dapat tidak tertangkap.</li>
+<li><b>Gambut:</b> data yang dipakai belum memuat kedalaman atau tingkat drainase, dan cakupannya perlu dipastikan lengkap (lihat bagian Data pengguna).</li>
+<li><b>Faktor yang belum dimasukkan:</b> bobot kerentanan per jenis penutup lahan (data PL 2025 sudah tersedia sebagai informasi), topografi, jarak ke jalan dan permukiman, konsesi, serta kadar air bahan bakar.</li>
+<li><b>Batas desa:</b> sebagian berstatus rancangan atau indikatif (lihat tabel di bawah), sehingga posisi desa dapat berubah.</li>
+<li><b>Waktu:</b> skor memakai data hotspot 2 hari terakhir dan cuaca terbaru dari model. Data disalin sekitar tiap 30 menit, sehingga kejadian baru dapat tampil dengan jeda.</li>
+<li><b>Tanpa LST:</b> suhu permukaan lahan satelit tidak ditampilkan karena tidak tersedia secara otomatis dan mutakhir. Suhu tanah dari model dipakai sebagai pendekatan dalam skor.</li>
+</ul>
+
+<h2 id="provenance">Data pengguna dan asal-usulnya</h2>
+<p>Bagian ini dibaca dari <code>data/metadata.json</code>. Isian yang kosong perlu dilengkapi dengan mengedit file tersebut (sumber, instansi, tahun, catatan); isian manual tidak akan terhapus saat data diproses ulang.</p>
+<div class="tw"><table id="prov" style="min-width:560px"><tbody><tr><td>Memuat…</td></tr></tbody></table></div>
+
+<h2 id="rujukan">Rujukan</h2>
+<ol class="ref">
+<li>Schroeder, W., Oliva, P., Giglio, L., &amp; Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product: Algorithm description and initial assessment. <i>Remote Sensing of Environment</i>, 143, 85-96. doi:10.1016/j.rse.2013.12.008</li>
+<li>Giglio, L., Schroeder, W., &amp; Justice, C. O. (2016). The collection 6 MODIS active fire detection algorithm and fire products. <i>Remote Sensing of Environment</i>, 178, 31-41. doi:10.1016/j.rse.2016.02.054</li>
+<li>Page, S. E., Siegert, F., Rieley, J. O., Boehm, H.-D. V., Jaya, A., &amp; Limin, S. (2002). The amount of carbon released from peat and forest fires in Indonesia during 1997. <i>Nature</i>, 420, 61-65. doi:10.1038/nature01131</li>
+<li>Van Wagner, C. E. (1987). <i>Development and structure of the Canadian Forest Fire Weather Index System</i>. Forestry Technical Report 35. Canadian Forestry Service, Ottawa.</li>
+<li>Kementerian Lingkungan Hidup dan Kehutanan RI. <i>Penutupan Lahan 2025 skala 1:50.000</i> (berkas PL2025_AR_50K, data pengguna).</li>
+<li>NASA FIRMS (Fire Information for Resource Management System), Earthdata: <a href="https://firms.modaps.eosdis.nasa.gov">firms.modaps.eosdis.nasa.gov</a>.</li>
+<li>Open-Meteo Weather and Air Quality API: <a href="https://open-meteo.com">open-meteo.com</a>. Data kualitas udara: Copernicus Atmosphere Monitoring Service (CAMS), ECMWF.</li>
+<li>Kementerian Lingkungan Hidup dan Kehutanan RI. Peraturan Menteri LHK No. P.14/MENLHK/SETJEN/KUM.1/7/2020 tentang Indeks Standar Pencemar Udara.</li>
+<li>OpenStreetMap contributors. <a href="https://www.openstreetmap.org/copyright">openstreetmap.org/copyright</a>.</li>
+</ol>
+</main>
+
+<script>
+(function(){
+var el=document.getElementById('prov');
+var e=function(v){return (v===''||v==null)?'<em class="todo">belum diisi</em>':String(v)};
+fetch('data/metadata.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(m){
+ var g=m.gambut||{},b=m.batas_kampung||{},l=m.penutup_lahan||{};
+ var st=b.status_ringkas?Object.keys(b.status_ringkas).map(function(k){return k+': '+b.status_ringkas[k]+' desa'}).join('; '):'';
+ var n=function(x){return (x||0).toLocaleString('id-ID')};
+ var rows=[
+  ['Lahan gambut','Sumber',e(g.sumber)],['','Instansi',e(g.instansi)],['','Tahun data',e(g.tahun)],
+  ['','Isi',n(g.jumlah_poligon_asli)+' poligon, '+n(g.luas_asli_ha)+' ha; setelah dipotong ke batas Berau '+n(g.jumlah_poligon_dipotong)+' poligon, '+n(g.luas_dipotong_ha)+' ha'],
+  ['','Catatan',e(g.catatan)],
+  ['Penutup lahan','Sumber',e(l.sumber)],['','Instansi',e(l.instansi)],['','Tahun data',e(l.tahun)],
+  ['','Isi',n(l.jumlah_poligon_asli)+' poligon, '+n(l.luas_asli_ha)+' ha; di dalam Berau '+n(l.luas_dalam_berau_ha)+' ha'],['','Catatan',e(l.catatan)],
+  ['Batas desa','Sumber',e(b.sumber)],['','Instansi',e(b.instansi)],['','Tahun data',e(b.tahun)],
+  ['','Isi',n(b.jumlah_desa)+' desa dalam '+n(b.jumlah_kecamatan)+' kecamatan'],
+  ['','Status penetapan batas',e(st)],['','Catatan',e(b.catatan)],
+  ['Diproses','Tanggal',e(m.diproses)]
+ ];
+ el.innerHTML='<thead><tr><th>Lapisan</th><th>Keterangan</th><th>Isi</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</tbody>';
+}).catch(function(){el.innerHTML='<tbody><tr><td>data/metadata.json tidak ditemukan. Buka halaman ini lewat server lokal (python -m http.server 8000) dan jalankan prepare_geodata.py.</td></tr></tbody>'});
+})();
+</script>
+</body>
+</html>
