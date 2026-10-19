@@ -1,0 +1,49 @@
+{
+ "versi": 2,
+ "acuan": "Permen LHK No. P.14/MENLHK/SETJEN/KUM.1/7/2020 tentang Indeks Standar Pencemar Udara (Berita Negara RI Tahun 2020 Nomor 774), Lampiran I dan II",
+ "rumus": "I = (Ia - Ib) / (Xa - Xb) * (Xx - Xb) + Ib",
+ "keterangan_rumus": "Ia dan Ib: ISPU batas atas dan bawah. Xa dan Xb: konsentrasi ambien batas atas dan bawah. Xx: konsentrasi hasil pengukuran. ISPU akhir adalah nilai sub-indeks terbesar dari semua parameter yang dihitung.",
+ "catatan_interpolasi": "Batas bawah konsentrasi pita dipakai sama dengan batas atas pita sebelumnya, sehingga tidak ada celah nilai. Tabel yang dikutip sumber sekunder memakai batas bawah + 0,1 (misalnya 15,6); selisihnya kurang dari 0,2 poin ISPU.",
+ "dipakai_untuk_ispu": ["primer", "sekunder"],
+ "catatan_dipakai": "Hanya parameter dengan status verifikasi 'primer' atau 'sekunder' yang ikut menentukan ISPU. Parameter berstatus 'belum' tetap ditampilkan sebagai informasi tetapi tidak dihitung, sampai ambangnya dicocokkan dengan Lampiran I dan II.",
+ "batas_ispu": [50, 100, 200, 300, 500],
+ "kategori": [
+  {"nama": "Baik", "min": 0, "max": 50, "warna": "#2e8b57", "teks": "#ffffff",
+   "saran": "Kualitas udara baik. Aman untuk beraktivitas di luar ruangan."},
+  {"nama": "Sedang", "min": 51, "max": 100, "warna": "#2f6fb0", "teks": "#ffffff",
+   "saran": "Dapat diterima bagi kebanyakan orang. Penderita asma atau gangguan napas sebaiknya berhati-hati."},
+  {"nama": "Tidak Sehat", "min": 101, "max": 200, "warna": "#d9a300", "teks": "#1d2a22",
+   "saran": "Anak, lansia, ibu hamil, dan penderita gangguan napas atau jantung batasi aktivitas di luar ruangan. Gunakan masker bila perlu."},
+  {"nama": "Sangat Tidak Sehat", "min": 201, "max": 300, "warna": "#c0392b", "teks": "#ffffff",
+   "saran": "Hindari aktivitas di luar ruangan. Gunakan masker N95/KN95 bila harus keluar."},
+  {"nama": "Berbahaya", "min": 301, "max": 500, "warna": "#161616", "teks": "#ffffff",
+   "saran": "Tetap di dalam ruangan, tutup ventilasi, dan hindari semua aktivitas di luar ruangan."}
+ ],
+ "parameter": {
+  "pm25": {"nama": "PM2.5", "rata_rata_jam": 24, "satuan": "µg/m³", "batas": [15.5, 55.4, 150.4, 250.4, 500], "verifikasi": "sekunder"},
+  "pm10": {"nama": "PM10", "rata_rata_jam": 24, "satuan": "µg/m³", "batas": [50, 150, 350, 420, 500], "verifikasi": "sekunder"},
+  "o3": {"nama": "O3", "rata_rata_jam": 1, "satuan": "µg/m³", "batas": [120, 235, 400, 800, 1000], "verifikasi": "belum"},
+  "no2": {"nama": "NO2", "rata_rata_jam": 24, "satuan": "µg/m³", "batas": [80, 200, 1130, 2260, 3000], "verifikasi": "sekunder"},
+  "so2": {"nama": "SO2", "rata_rata_jam": 24, "satuan": "µg/m³", "batas": [52, 180, 400, 800, 1200], "verifikasi": "sekunder"},
+  "co": {"nama": "CO", "rata_rata_jam": 8, "satuan": "µg/m³", "batas": [4000, 8000, 15000, 30000, 45000], "verifikasi": "belum"}
+ },
+ "tidak_tersedia": ["HC (hidrokarbon)"],
+ "status_verifikasi": {
+  "primer": [
+   "Tujuh parameter ISPU (PM10, PM2.5, CO, NO2, SO2, O3, HC): Pasal 2 ayat (2), dibaca dari salinan Berita Negara.",
+   "ISPU dihitung setiap 1 jam dari data pemantauan 24 jam terus-menerus: Pasal 6 ayat (1).",
+   "Lima nama kategori: Pasal 7 ayat (4).",
+   "Data harian dipakai bila minimal 75% valid: Pasal 7 ayat (3); dipakai di sini untuk rata-rata jendela (minimal 75% jam terisi)."
+  ],
+  "sekunder": [
+   "PM2.5: pita ISPU 0-50, 51-100, 101-200, 201-300 dengan batas atas 15,5; 55,4; 150,4; 250,4 µg/m³ (Tabel 2.1, BAB II, kc.umn.ac.id/id/eprint/48656, yang menyatakan merujuk Permen LHK P.14/2020). Batas atas pita Berbahaya (500) tidak ada di tabel itu dan belum terverifikasi; waktu rata-rata 24 jam tidak disebut di sumber itu.",
+   "Ambang PM10, SO2, NO2 dan rumus interpolasi: Tabel 1 dan persamaan II-1 pada artikel Jurnal Geodesi Undip (ejournal3.undip.ac.id, artikel 38859, hlm. 273) yang mengutip Permen LHK P.14/2020. Artikel itu menulis waktu rata-rata 24 jam untuk ketiganya.",
+   "Rumus interpolasi dan kelima rentang kategori juga cocok dengan Tabel 2.2 dan persamaan 2.1 di BAB II kc.umn.ac.id tersebut."
+  ],
+  "belum": [
+   "CO dan O3 (ambang, serta waktu rata-rata CO 8 jam dan O3 1 jam): belum dicocokkan dengan Lampiran I dan II karena lampiran tidak terbaca pada salinan yang dapat diakses. Tidak ikut dihitung.",
+   "Warna kategori di berkas ini adalah pilihan tampilan, bukan ketentuan Permen.",
+   "Cocokkan seluruh tabel dengan dokumen resmi (Berita Negara 774/2020) sebelum dipakai untuk pernyataan resmi."
+  ]
+ }
+}
