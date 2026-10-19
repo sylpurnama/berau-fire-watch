@@ -1,0 +1,86 @@
+[
+ {
+  "name": "Batu Putih",
+  "lat": 1.3348,
+  "lon": 118.3475,
+  "gambut_pct": 6.88
+ },
+ {
+  "name": "Biatan",
+  "lat": 1.4637,
+  "lon": 117.9985,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Biduk-Biduk",
+  "lat": 1.1767,
+  "lon": 118.6759,
+  "gambut_pct": 0.87
+ },
+ {
+  "name": "Gunung Tabur",
+  "lat": 2.3417,
+  "lon": 117.5594,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Kelay",
+  "lat": 1.8867,
+  "lon": 116.4317,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Kepulauan Derawan",
+  "lat": 2.3077,
+  "lon": 117.9771,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Maratua",
+  "lat": 2.1396,
+  "lon": 118.5407,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Pulau Derawan",
+  "lat": 2.1073,
+  "lon": 117.8281,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Sambaliung",
+  "lat": 1.9772,
+  "lon": 117.5242,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Segah",
+  "lat": 2.2153,
+  "lon": 116.8814,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Tabalar",
+  "lat": 1.7277,
+  "lon": 117.5617,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Talisayan",
+  "lat": 1.4042,
+  "lon": 118.1472,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Tanjung Redeb",
+  "lat": 2.1445,
+  "lon": 117.4952,
+  "gambut_pct": 0.0
+ },
+ {
+  "name": "Teluk Bayur",
+  "lat": 2.0896,
+  "lon": 117.3384,
+  "gambut_pct": 0.0
+ }
+]
